@@ -1,0 +1,174 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#main-container {
+    display: flex;
+    position: relative;
+}
+
+#sidebar {
+    width: 250px;
+    height: calc(100vh - 99px);
+    position: relative;
+    padding: 10px;
+    margin: 8px;
+    /* border-right: 2px solid #106eea; */
+    border: 1px solid black;
+    color: black;
+    transition: all 0.3s;
+    overflow: hidden;
+}
+
+#sidebar.collapsed {
+    width: 50px;
+    padding: 0px;
+}
+
+#sidebar.collapsed .nav-text,
+#sidebar.collapsed ul:not(.nav-list),
+#sidebar.collapsed .bi-caret-right-fill {
+    display: none;
+}
+
+.nav-list {
+    margin-top: 55px;
+}
+
+#sidebar ul .nav-link {
+    cursor: pointer;
+    color: black;
+    display: flex;
+    align-items: center;
+    border: 1px solid #106eea;
+    background-color: #689fe8;
+    margin: 1px 0;
+}
+
+#sidebar ul .nav-link i {
+    font-size: 20px;
+    min-width: 30px;
+    text-align: center;
+}
+
+#sidebar.collapsed .nav-link {
+    padding: 0;
+    margin: 5px;
+}
+
+#sidebar.collapsed .nav-link i {
+    font-size: 20px;
+    padding: 0px 7px;
+    border-radius: 5px;
+    color: white;
+}
+
+#sidebar.collapsed .nav-text {
+    display: none;
+}
+
+#sidebar ul ul {
+    transition: all 0.3s ease-in-out;
+}
+
+.rotate-down {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+}
+
+#sidebar.hidden {
+    margin-left: -250px;
+}
+
+#content-area {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+#content {
+    transition: margin-left 0.3s;
+    margin-left: 250px;
+    flex: 1;
+    padding: 30px;
+}
+
+#sidebar.hidden+#content {
+    margin-left: 0;
+}
+
+.toggle-btn {
+    position: absolute;
+    top: 12px;
+    left: 13px;
+    z-index: 999;
+    color: black;
+    font-size: 25px;
+    background: transparent;
+    border: 1px solid #106eea;
+    padding: 0px 7px;
+    border-radius: 5px;
+}
+
+.toggle-btn:hover {
+    background: #106eea;
+    color: white;
+}
+
+.logout-btn {
+    width: 92%;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.33s ease-in-out;
+    color: var(--contrast-color);
+    background: var(--accent-color);
+    font-family: var(--heading-font);
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 12px 30px;
+    border-radius: 8px;
+    position: absolute;
+    bottom: 1%;
+}
+
+.logout-btn i {
+    font-size: 20px;
+    color: black;
+}
+
+#sidebar.collapsed .logout-btn {
+    padding: 0;
+    margin-left: 1px;
+    background-color: transparent;
+}
+
+
+#sidebar.collapsed .logout-btn i {
+    padding: 4px 8px;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--accent-color);
+}
+/* Make pharmacies-submenu scrollable within fixed height */
+#pharmacies-submenu {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+    padding-left: 0;
+}
+
+/* Optional: Improve look */
+#pharmacies-submenu::-webkit-scrollbar {
+    width: 6px;
+}
+#pharmacies-submenu::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+}

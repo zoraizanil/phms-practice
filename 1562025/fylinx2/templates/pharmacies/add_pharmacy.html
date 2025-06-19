@@ -1,0 +1,116 @@
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %}" style="padding: 10px; margin: 10px 0; border-radius: 4px; {% if message.tags == 'error' %}background-color: #ffebee; color: #c62828;{% else %}background-color: #e8f5e9; color: #2e7d32;{% endif %}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="Pharmacy-form">
+    <form method="post" action="{% url 'add_pharmacy' %}" id="addPharmacyForm">
+        {% csrf_token %}
+        <h2 class="text-center">Add Pharmacy</h2>
+
+        <div class="form-group">
+            <input type="text" id="pharmacyName" name="name" placeholder="Pharmacy Name" required />
+        </div>
+        <div class="form-group">
+            <input type="text" id="pharmacyAddress" name="location" placeholder="Enter Address" required />
+        </div>
+        <button class="submit-btn" type="submit">CREATE</button>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const addPharmacyForm = document.getElementById('addPharmacyForm');
+    if (addPharmacyForm) {
+        addPharmacyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const csrfToken = formData.get('csrfmiddlewaretoken');
+
+            fetch("{% url 'add_pharmacy' %}", {
+                method: "POST",
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Add success message
+                    const messagesDiv = document.querySelector('.messages') || document.createElement('div');
+                    if (!document.querySelector('.messages')) {
+                        messagesDiv.className = 'messages';
+                        document.querySelector('.Pharmacy-form').before(messagesDiv);
+                    }
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-success';
+                    alertDiv.style.cssText = 'padding: 10px; margin: 10px 0; border-radius: 4px; background-color: #e8f5e9; color: #2e7d32;';
+                    alertDiv.textContent = data.message;
+                    messagesDiv.prepend(alertDiv);
+
+                    // Clear form
+                    addPharmacyForm.reset();
+
+                    // Remove message after 5 seconds
+                    setTimeout(() => {
+                        alertDiv.remove();
+                        if (messagesDiv.children.length === 0) {
+                            messagesDiv.remove();
+                        }
+                    }, 5000);
+                } else {
+                    // Add error message
+                    const messagesDiv = document.querySelector('.messages') || document.createElement('div');
+                    if (!document.querySelector('.messages')) {
+                        messagesDiv.className = 'messages';
+                        document.querySelector('.Pharmacy-form').before(messagesDiv);
+                    }
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-danger';
+                    alertDiv.style.cssText = 'padding: 10px; margin: 10px 0; border-radius: 4px; background-color: #ffebee; color: #c62828;';
+                    alertDiv.textContent = data.error;
+                    messagesDiv.prepend(alertDiv);
+
+                    // Remove message after 5 seconds
+                    setTimeout(() => {
+                        alertDiv.remove();
+                        if (messagesDiv.children.length === 0) {
+                            messagesDiv.remove();
+                        }
+                    }, 5000);
+                }
+            })
+            .catch(error => {
+                console.error("AJAX Error:", error);
+                const messagesDiv = document.querySelector('.messages') || document.createElement('div');
+                if (!document.querySelector('.messages')) {
+                    messagesDiv.className = 'messages';
+                    document.querySelector('.Pharmacy-form').before(messagesDiv);
+                }
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-danger';
+                alertDiv.style.cssText = 'padding: 10px; margin: 10px 0; border-radius: 4px; background-color: #ffebee; color: #c62828;';
+                alertDiv.textContent = "Something went wrong while adding the pharmacy.";
+                messagesDiv.prepend(alertDiv);
+
+                // Remove message after 5 seconds
+                setTimeout(() => {
+                    alertDiv.remove();
+                    if (messagesDiv.children.length === 0) {
+                        messagesDiv.remove();
+                    }
+                }, 5000);
+            });
+        });
+    }
+});
+</script>

@@ -1,0 +1,64 @@
+<!-- <h2>Create Admin</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Create Admin</button>
+</form> -->
+
+
+<div class="Pharmacy-form">
+  <form method="post" action="{% url 'create_admin' %}">
+    {% csrf_token %}
+    <h2 class="text-center">Create Admin</h2>
+
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+      {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+          <p>{{ field|title }}: {{ error }}</p>
+        {% endfor %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+      <input type="text" name="username" placeholder="Enter UserName" required 
+             value="{{ post_data.username|default:'' }}" />
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="first_name" placeholder="First Name" required 
+             value="{{ post_data.first_name|default:'' }}" />
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="last_name" placeholder="Last Name" required 
+             value="{{ post_data.last_name|default:'' }}" />
+    </div>
+
+    <div class="form-group">
+      <input type="email" name="email" placeholder="Your Email" required 
+             value="{{ post_data.email|default:'' }}" />
+    </div>
+
+    <div class="form-group">
+      <input type="password" name="password1" placeholder="Enter Password" required />
+    </div>
+
+    <div class="form-group">
+      <input type="password" name="password2" placeholder="Confirm Password" required />
+    </div>
+
+    <button class="submit-btn" type="submit">CREATE</button>
+  </form>
+</div>

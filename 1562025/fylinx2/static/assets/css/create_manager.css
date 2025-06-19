@@ -1,0 +1,29 @@
+.Pharmacy-form {
+    padding: 30px;
+}
+
+.btn.dropdown-toggle {
+    border: 1px solid #ccc;
+    width: 80%;
+    display: block;
+    margin-inline: auto;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn.dropdown-toggle:hover {
+    border: 1px solid #ccc;
+    color: #6c757d;
+}
+
+#manager-Dropdown {
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

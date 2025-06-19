@@ -1,0 +1,37 @@
+.Pharmacy-form {
+    border: 1px solid #106eea;
+    border-radius: 30px;
+    width: 50%;
+    margin: auto;
+    padding: 40px;
+}
+
+.form-group {
+    width: 80%;
+    margin: 0 auto;
+    padding: 12px 0px;
+}
+
+button.submit-btn {
+  width: 30%;
+  margin: 20px auto 0px auto;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.33s ease-in-out;
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-family: var(--heading-font);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: block;
+  padding: 12px 30px;
+  border-radius: 8px;
+}
+
+button.submit-btn:hover {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,87 @@
+<!-- Hero Section -->
+<div id="main-container">
+    <!-- Sidebar -->
+    <button id="sidebarToggle" class="toggle-btn" onclick="toggleSidebar()">
+        <i class="bi bi-list"></i>
+    </button>
+    <!-- Sidebar Wrapper -->
+    <div id="sidebar">
+        <ul class="nav-list nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center" onclick="loadPage('/home-page/')">
+                    <i class="bi bi-house"></i>
+                    <span class="nav-text">Home</span>
+                </a>
+            </li>
+
+            <!-- Add Pharmacy -->
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center" onclick="loadPage('pharmacy/add/')">
+                    <i class="bi bi-building-add"></i>
+                    <span class="nav-text">Add Pharmacy</span>
+                </a>
+            </li>
+
+            <!-- DELETE Pharmacy -->
+            <li class="nav-item">
+                <a class="nav-link" onclick="loadPage('/pharmacy/delete/')">
+                    <i class="bi bi-trash"></i>
+                    <span>Delete Pharmacy</span>
+                </a>
+            </li>
+
+            <!-- Create User -->
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center" onclick="toggleSubmenu('contact-submenu', this)">
+                    <i class="bi bi-person-plus"></i>
+                    <span class="nav-text">Create User</span>
+                    <i class="bi bi-caret-right-fill ms-auto text-white nav-text"></i>
+                </a>
+                <ul id="contact-submenu" class="nav flex-column ms-3 d-none">
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="loadPage('create-manager/')">Manager</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="loadPage('create-admin/')">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="loadPage('create-staff/')">Staff</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <hr>
+
+        <!-- Pharmacies List -->
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center"
+                    onclick="toggleSubmenu('pharmacies-submenu', this); loadPharmacies();">
+                    <i class="bi bi-capsule-pill"></i>
+                    <span class="nav-text">Pharmacies</span>
+                    <i class="bi bi-caret-right-fill ms-auto text-white nav-text"></i>
+                </a>
+                <ul id="pharmacies-submenu" class="nav flex-column ms-3 d-none pharmacies-submenu">
+                    <!-- Dynamic items will load here -->
+                </ul>
+            </li>
+        </ul>
+
+
+
+
+
+        <!-- Logout Button Fixed to Bottom -->
+        <button class="logout-btn" onclick="loadPage('logout/')">
+            <i class="bi bi-box-arrow-left"></i>
+            <span class="nav-text">LogOut</span>
+        </button>
+
+    </div>
+
+
+    <!-- Content Area -->
+    <div id="content-area">
+    </div>
+</div>
+<!-- End Hero Section -->
